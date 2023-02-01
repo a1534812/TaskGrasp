@@ -33,10 +33,14 @@ git clone https://github.com/adithyamurali/TaskGrasp.git
 3) Install dependencies
 ```shell
 cd TaskGrasp
-# 已尝试：
+# pointnet2会有pytorch版本问题
+**# GPU：3090**
+**# 已尝试：**
 # torch 1.4.0，cuda 10.0, python 3.6
 # torch 1.7.1, cuda 10.1, python 3.6
 # torch 1.8.1, cuda 10.1, python 3.6
+# torch 1.6.0, cuda 10.1, python 3.6
+# torch 1.5.1, cuda 10.1, python 3.6
 conda install pytorch=1.4.0 torchvision cudatoolkit=10.0 -c pytorch
 pip install -r requirements.txt
 ```
