@@ -18,12 +18,11 @@ docker exec -it <刚刚创建的容器id> /bin/bash
 ## 配置容器软件环境（apt-get是应用的意思吗？不是非常清楚，只会用233）
 ```shell
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A4B469963BF863CC
-apt update
+apt-get update
 apt upgrade
 apt-get dist-upgrade
 apt-get install wget git vim unzip dialog
 apt-get install -y gcc python-dev python3-dev libevent-dev
-apt-get update
 apt-get install ffmpeg libsm6 libxext6  -y
 apt-get install libgl1
 ```
@@ -108,8 +107,15 @@ conda install setuptools==58.0.4
 https://blog.csdn.net/weixin_42912498/article/details/107162983
 
 ## 开跑
+训练
 ```shell
 python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
+```
+验证
+```shell
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
+```
+可以看的验证
+```shell
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class pan.n.01 --task pour
 ```
