@@ -95,7 +95,7 @@ rm ./checkpoints.zip
 ```
 
 ## 一点小注意
-可能会报错：
+1. 可能会报错：
 ```shell
 AttributeError: module 'distutils' has no attribute 'version'
 ```
@@ -104,6 +104,8 @@ AttributeError: module 'distutils' has no attribute 'version'
 pip uninstall setuptools
 conda install setuptools==58.0.4
 ```
+2. 终端可能input/output错误，尝试以下：
+https://blog.csdn.net/weixin_42912498/article/details/107162983
 
 ## 开跑
 ```shell
