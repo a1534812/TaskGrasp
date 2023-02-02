@@ -93,3 +93,14 @@ rm ./data.zip
 rm ./cfg.zip
 rm ./checkpoints.zip
 ```
+
+## 一点小注意
+可能会报错：
+```shell
+AttributeError: module 'distutils' has no attribute 'version'
+```
+似乎是tensorboard和setuptools版本问题。解决方法：
+```shell
+pip uninstall setuptools
+conda install setuptools==58.0.4
+```
