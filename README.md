@@ -26,12 +26,16 @@ apt-get install -y gcc python-dev python3-dev libevent-dev
 apt-get install ffmpeg libsm6 libxext6  -y
 apt-get install libgl1
 ```
-安装可视化
+安装可视化(ssh)
 ```shell
 apt install xfce4 --fix-missing
 vim ~/.bashrc
 	export  DISPLAY=<自己的ipv4地址>:0.0
 source ~/.bashrc
+```
+安装可视化(vnc)
+```shell
+[https://blog.csdn.net/Robert_Q/article/details/127376171](https://blog.csdn.net/Robert_Q/article/details/127376171)
 ```
 
 ## Installation
