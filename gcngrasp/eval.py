@@ -135,6 +135,22 @@ def main(cfg, save=False, visualize=False, experiment_dir=None):
     if "task_embedding.weight" in model_weights:
         del model_weights["task_embedding.weight"]
 
+    # 取出预训练网络的参数字典
+    keys = []
+    model_dict = model.state_dict()
+    for k, v in model_weights.items():
+        keys.append(k)
+        i = 0
+    # print('* -------------------- *')
+    # print(key)
+    # print('* ++++++++++++++++++++ *')
+        # 自己网络和预训练网络结构一致的层，使用预训练网络对应层的参数初始化
+    for k, v in model_dict.items():
+        if v.size() == model_weights[keys[i]].size():
+            model_dict[k] = model_weights[keys[i]]
+            i = i + 1
+    # print(model_dict)
+        
     model.load_state_dict(model_weights)
     model = model.to(DEVICE)
     model.eval()
