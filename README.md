@@ -35,7 +35,7 @@ source ~/.bashrc
 ```
 安装可视化(vnc)
 ```shell
-[https://blog.csdn.net/Robert_Q/article/details/127376171](https://blog.csdn.net/Robert_Q/article/details/127376171)
+https://blog.csdn.net/Robert_Q/article/details/127376171
 ```
 
 ## Installation
