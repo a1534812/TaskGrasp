@@ -1,112 +1,95 @@
-## Same Object, Different Grasps: Data and Semantic Knowledge for Task-Oriented Grasping
-#### In CoRL 2020 [[arXiv]](https://arxiv.org/abs/2011.06431) [[Robot Video]](https://youtu.be/ByHVc-sPmd8) [[project page]](https://sites.google.com/view/taskgrasp) [[pdf]](https://arxiv.org/pdf/2011.06431.pdf)
+## 自用复现taskgrasp
 
-[Adithya Murali](http://adithyamurali.com), [Weiyu Liu](http://weiyuliu.com/), [Kenneth Marino](http://kennethmarino.com/), [Sonia Chernova](https://www.cc.gatech.edu/~chernova/), [Abhinav Gupta](http://www.cs.cmu.edu/~abhinavg)
-
-Carnegie Mellon University Robotics Institute, Georgia Institute of Technology, Facebook AI Research
-
-<!-- <img src='images/hcp.png' width="400"> <img src="https://thumbs.gfycat.com/SafeNeighboringHydatidtapeworm-size_restricted.gif" width="400"> -->
-
-This is a pytorch-based implementation for our [CoRL 2020 paper on task-oriented grasping](https://arxiv.org/abs/2011.06431). If you find this work useful in your research, please cite:
-
-	@inproceedings{murali2020taskgrasp,
-	  title={Same Object, Different Grasps: Data and Semantic Knowledge for Task-Oriented Grasping},
-	  author={Murali, Adithyavairavan and Liu, Weiyu and Marino, Kenneth and Chernova, Sonia and Gupta, Abhinav},
-	  booktitle={Conference on Robot Learning},
-	  year={2020}
-	}
-
+### 原项目环境：
 The code has been tested on **Ubuntu 16.04** and with **CUDA 10.0**.
+如果是20系列显卡直接按原项目readme走就行了。
+#### 原项目传送门：[[project page]](https://github.com/adithyamurali/TaskGrasp)
 
-## Installation
+我是30系列显卡，所以改了点。另外不知道是不是版本不一样的原因，读取权重的时候也要稍微该点东西。
 
-1) Create a virtual env or conda environment with python3
+# 如果使用docker
+## 1. 拉image，创建容器，进入容器
 ```shell
-conda create --name taskgrasp python=3.6
-conda activate taskgrasp
+docker pull nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
+docker run -itd --name cuda111 --gpus all --network host -v <要挂载的本地文件夹>:/mnt <刚刚拉的imageID> /bin/bash
+docker exec -it <刚刚创建的容器id> /bin/bash
+```
+
+## 2. 配置容器软件环境（apt-get是应用的意思吗？不是非常清楚，只会用233）
+```shell
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A4B469963BF863CC
+apt update
+apt upgrade
+apt-get dist-upgrade
+apt-get install wget git vim unzip dialog
+apt-get install -y gcc python-dev python3-dev libevent-dev
+apt-get update
+apt-get install ffmpeg libsm6 libxext6  -y
+apt-get update && apt-get install libgl1
+```
+安装可视化
+```shell
+apt install xfce4 --fix-missing
+vim ~/.bashrc
+	export  DISPLAY<自己的ipv4地址>:0.0
+source ~/.bashrc
+```
+
+## 3. Installation
+1) Create a virtual env or conda environment with python3，我用的python3.7，应该影响不大？
+```shell
+conda create --name taskgrasp_37 python=3.7
+conda activate taskgrasp_37
 ```
 2) Make a workspace, clone the repo
 ```shell
 mkdir ~/taskgrasp_ws && cd ~/taskgrasp_ws
-git clone https://github.com/adithyamurali/TaskGrasp.git
+# clone我自己的，嘻嘻
+git clone https://github.com/a1534812/TaskGrasp.git
 ```
 3) Install dependencies
 ```shell
 cd TaskGrasp
-# pointnet2会有pytorch版本问题
-**# GPU：3090**
-**# 已尝试：**
-# torch 1.4.0，cuda 10.0, python 3.6
-# torch 1.7.1, cuda 10.1, python 3.6
-# torch 1.8.1, cuda 10.1, python 3.6
-# torch 1.6.0, cuda 10.1, python 3.6
-# torch 1.5.1, cuda 10.1, python 3.6
-conda install pytorch=1.4.0 torchvision cudatoolkit=10.0 -c pytorch
+# 安装pytorch，按自己显卡和cuda版本来就行了
+pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
+# requirement删除了pygraphviz，gensim，不知道为什么这两个包pip不了
+conda install -c conda-forge pygraphviz
+conda install -c conda-forge gensim
 pip install -r requirements.txt
 ```
 4) Compile and install [PointNet ops](https://github.com/erikwijmans/Pointnet2_PyTorch)
 ```shell
 cd ~/taskgrasp_ws
+# 原版：
 git clone https://github.com/erikwijmans/Pointnet2_PyTorch.git
+# 或者clone为自己的，之前以为cuda11系列要该setup，但是那个似乎是针对pointnet_ops 2.0的，v3.0作者好像改了一些东西，不需要改了，虽然改了也不影响
+# 我自己的：
+git clone https://github.com/a1534812/Pointnet2_PyTorch.git
+
 cd Pointnet2_PyTorch
 pip install -r requirements.txt
 pip install -e .
 ```
 5) Install [Pytorch Geometric](https://github.com/rusty1s/pytorch_geometric) (only tested on v1.5.0)
+这里我直接装了最新版的Pytorch Geometric，没报错。另外原版很方便的pip用不了，咱也不懂，只能用最笨的办法本地pip了。具体方法是：去[https://pytorch-geometric.com/whl/](https://pytorch-geometric.com/whl/) ，找自己对应的版本wget，然后顺着pip，一共四个包，torch_cluster，torch_scatter，torch_sparse，torch_spline，先pip这四个包，然后：
 ```shell
-pip install torch-scatter==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html && pip install torch-sparse==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html && pip install torch-cluster==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html && pip install torch-spline-conv==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html && pip install torch-geometric==1.5.0
+pip install torch-geometric
 ```
 
 ## Dataset
-The dataset (5 GB) could be downloaded [here](https://drive.google.com/file/d/1aZ0k43fBIZZQPPPraV-z6itpqCHuDiUU/view?usp=sharing) and place it in the `data` folder as shown below:
+因为用的服务器，懒得一个个慢慢下载再上传了，直接gdown
 ```shell
 cd ~/taskgrasp_ws/TaskGrasp
-unzip ~/Downloads/data.zip -d ./
-rm ~/Downloads/data.zip
+pip install gdown
+
+gdown https://drive.google.com/uc?id=1aZ0k43fBIZZQPPPraV-z6itpqCHuDiUU
+gdown https://drive.google.com/uc?id=1fasm-8MV6zBjdnbAHLbU8_8TZOkeABkR
+gdown https://drive.google.com/uc?id=1vJfkaCCLJmvT8i5OB-qx_pOojgx2ouPf
+unzip ./data.zip -d ./
+unzip ./cfg.zip -d ./
+unzip ./checkpoints.zip -d ./
+
+rm ./data.zip
+rm ./cfg.zip
+rm ./checkpoints.zip
 ```
-To run any of the demo scripts explained below, do the same with the [pretrained models (589 MB)](https://drive.google.com/file/d/1fasm-8MV6zBjdnbAHLbU8_8TZOkeABkR/view?usp=sharing) and [config files (10 KB)](https://drive.google.com/file/d/1vJfkaCCLJmvT8i5OB-qx_pOojgx2ouPf/view?usp=sharing) and put them in the `checkpoints` and `cfg` folder respectively.
-
-**Coming Soon:** We are trying to release mesh models for the objects as well.
-
-## Usage
-
-**NOTE:** The stable grasps were sampled from the point cloud using the [agile_grasp](https://github.com/GT-RAIL/rail_agile) repo from [GT-RAIL](http://www.rail.gatech.edu/).
-
-Point Cloud         |  Stable grasps
-:-------------------------:|:-------------------------:
-<img src="assets/pc.gif" width="256" height="256" title="pc">  |  <img src="assets/grasps.jpg" width="256" height="256" title="grasps">
-
-To visualize the point cloud data and stable grasps:
-```shell
-python visualize.py --data_and_grasps --obj_name 124_paint_roller
-```
-Add the `--obj_path` argument with the absolute path to the dataset if you have placed it somewhere other than the default location (`data/taskgrasp`). The object can be specified with the `--obj_name` argument and the full list of objects can be found [here](gcngrasp/data/taskgrasp_objects.txt).
-
-<img src="assets/tog.gif" width="512" height="512" title="tog">
-
-To visualize the labelled task-oriented grasps in the TaskGrasp dataset:
-```shell
-python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_paint_roller
-```
-
-To visualize a specific grasp:
-```shell
-python visualize.py --obj_name 124_paint_roller --visualize_grasp --grasp_id 10
-```
-
-To run any of the training or evaluation scripts, download the config files from [here](https://drive.google.com/file/d/1vJfkaCCLJmvT8i5OB-qx_pOojgx2ouPf/view?usp=sharing) and put them in the cfg folder. To train a model:
-```shell
-python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
-```
-
-To run pretrained models, download the models from [here](https://drive.google.com/file/d/1fasm-8MV6zBjdnbAHLbU8_8TZOkeABkR/view?usp=sharing) and unzip them into the checkpoints folder. To evaluate trained model on test set:
-```shell
-python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save
-```
-
-Here's how to run evaluation on a single point cloud (e.g. sample data of an unknown object captured from a depth sensor) and assuming you already have sampled stable grasps. Make sure you have downloaded the pretrained models and data from the previous step, and run the following:
-```shell
-python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class pan.n.01 --task pour
-```
-
-<img src="assets/pan.jpg" width="300" height="256" title="pan">
