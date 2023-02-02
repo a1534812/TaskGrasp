@@ -104,3 +104,10 @@ AttributeError: module 'distutils' has no attribute 'version'
 pip uninstall setuptools
 conda install setuptools==58.0.4
 ```
+
+## 开跑
+```shell
+python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
+python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
+python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class pan.n.01 --task pour
+```
