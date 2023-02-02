@@ -31,7 +31,7 @@ apt-get install libgl1
 ```shell
 apt install xfce4 --fix-missing
 vim ~/.bashrc
-	export  DISPLAY<自己的ipv4地址>:0.0
+	export  DISPLAY=<自己的ipv4地址>:0.0
 source ~/.bashrc
 ```
 
