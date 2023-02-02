@@ -25,7 +25,7 @@ apt-get install wget git vim unzip dialog
 apt-get install -y gcc python-dev python3-dev libevent-dev
 apt-get update
 apt-get install ffmpeg libsm6 libxext6  -y
-apt-get update && apt-get install libgl1
+apt-get install libgl1
 ```
 安装可视化
 ```shell
