@@ -8,14 +8,14 @@ The code has been tested on **Ubuntu 16.04** and with **CUDA 10.0**.
 我是30系列显卡，所以改了点。另外不知道是不是版本不一样的原因，读取权重的时候也要稍微该点东西。
 
 # 如果使用docker
-## 1. 拉image，创建容器，进入容器
+## 拉image，创建容器，进入容器
 ```shell
 docker pull nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
 docker run -itd --name cuda111 --gpus all --network host -v <要挂载的本地文件夹>:/mnt <刚刚拉的imageID> /bin/bash
 docker exec -it <刚刚创建的容器id> /bin/bash
 ```
 
-## 2. 配置容器软件环境（apt-get是应用的意思吗？不是非常清楚，只会用233）
+## 配置容器软件环境（apt-get是应用的意思吗？不是非常清楚，只会用233）
 ```shell
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A4B469963BF863CC
 apt update
@@ -35,7 +35,7 @@ vim ~/.bashrc
 source ~/.bashrc
 ```
 
-## 3. Installation
+## Installation
 1) Create a virtual env or conda environment with python3，我用的python3.7，应该影响不大？
 ```shell
 conda create --name taskgrasp_37 python=3.7
