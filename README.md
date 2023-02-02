@@ -2,8 +2,8 @@
 
 ### 原项目环境：
 The code has been tested on **Ubuntu 16.04** and with **CUDA 10.0**.
-如果是20系列显卡直接按原项目readme走就行了。
-#### 原项目传送门：[[project page]](https://github.com/adithyamurali/TaskGrasp)
+如果是20系列显卡直接按原仓库readme走就行了。
+#### 原仓库传送门：[[github page]](https://github.com/adithyamurali/TaskGrasp)
 
 我是30系列显卡，所以改了点。另外不知道是不是版本不一样的原因，读取权重的时候也要稍微该点东西。
 
