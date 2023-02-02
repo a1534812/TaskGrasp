@@ -5,6 +5,8 @@ matplotlib
 nltk
 ordered-set
 xlrd
-pygraphviz
-gensim
 pytorch-lightning==0.7.1
+open3d
+opencv-python
+opencv-contrib-python
+networkx
