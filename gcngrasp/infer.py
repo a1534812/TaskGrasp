@@ -79,7 +79,7 @@ def load_model(cfg):
             i = i + 1
     # print(model_dict)
         
-    model.load_state_dict(model_weights)
+    model.load_state_dict(model_dict)
     model = model.to(DEVICE)
     model.eval()
 
