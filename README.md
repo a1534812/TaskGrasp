@@ -123,3 +123,6 @@ python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
 ```shell
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class pan.n.01 --task pour
 ```
+
+# 现在有的问题
+tmd怎么plot_ap里头class的ap居然会有零，认真的吗？到底是数据有问题还是我跑的有问题？
