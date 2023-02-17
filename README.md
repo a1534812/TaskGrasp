@@ -39,7 +39,7 @@ https://blog.csdn.net/Robert_Q/article/details/127376171
 ```
 
 ## Installation
-1) Create a virtual env or conda environment with python3，我用的python3.7，应该影响不大？
+1) Create a virtual env or conda environment with python3，我建议是3.7，因为好像尝试cuda11系列的时候，如果python用3.6，对应的pytorch有问题还是啥的
 ```shell
 conda create --name taskgrasp_37 python=3.7
 conda activate taskgrasp_37
