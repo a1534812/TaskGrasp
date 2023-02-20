@@ -4,7 +4,7 @@ Same Object, Different Grasps: Data and Semantic Knowledge for Task-Oriented Gra
 
 碎碎念：救命啊，不小心把原本的readme顶掉了
 其实基本就是顺着原项目的走，只是毕竟我能用的GPU全是30系列的，原本的有的部分有点不太适用，做个小记录。
-有好多人和我说用docker以后30系列也可以跑cuda10的东西，但是我试了，pytorch还是会报错cuda和显卡不匹配，不晓得是不是需要多的一些操作。
+据说用docker以后30系列也可以跑cuda10的东西，但是我试了，pytorch还是会报错cuda和显卡不匹配，不晓得是不是需要多的一些操作。
 
 ### 假如你要用docker
 创建完容器之后
