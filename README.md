@@ -59,6 +59,8 @@ pip install torch-geometric
 ```
 后面照常：
 ```
+pip install gdown
+
 cd ~/taskgrasp_ws/TaskGrasp
 gdown https://drive.google.com/uc?id=1aZ0k43fBIZZQPPPraV-z6itpqCHuDiUU
 gdown https://drive.google.com/uc?id=1fasm-8MV6zBjdnbAHLbU8_8TZOkeABkR
