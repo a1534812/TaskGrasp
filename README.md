@@ -86,3 +86,5 @@ python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class pan.n.01 --task pour
 ```
+现在的问题：
+我想看一眼ap，结果跑gcngrasp的plot_ap.py的时候，居然发现有的obj_class是0？？？正在看什么鬼问题
