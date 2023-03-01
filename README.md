@@ -85,7 +85,7 @@ python visualize.py --data_and_grasps --obj_name 124_paint_roller
 python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_paint_roller
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class frying_pan.n.01 --task pour
-# 作者原本写的pan.n.01，可我翻了翻论文，Object Task Combinations根本没这一类。再翻一翻数据集里的object synsets links，tmd pan.n.01这个类就一个cake pan……作者你认真的吗？ 
+# 这里作者原本写的pan.n.01，可我翻了翻论文，Object Task Combinations根本没这一类。再翻一翻数据集里的object synsets links，tmd pan.n.01这个类就一个cake pan……作者你认真的吗？
 ```
 现在的问题：
 我想看一眼ap，结果跑gcngrasp的plot_ap.py的时候，居然发现有的obj_class是0？？？正在看什么鬼问题
