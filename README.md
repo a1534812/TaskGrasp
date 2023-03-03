@@ -2,9 +2,8 @@
 Same Object, Different Grasps: Data and Semantic Knowledge for Task-Oriented Grasping
 原项目传送门：[ori object](https://github.com/adithyamurali/TaskGrasp.git)
 
-碎碎念：救命啊，不小心把原本的readme顶掉了。
-
-加了点6D-graspnet+GCNgrasp的简单串联。
+碎碎念：
+正在试6D-graspnet+GCNgrasp能不能简单串联一下。
 
 其实基本就是顺着原项目的走，只是毕竟我能用的GPU全是30系列的，原本的有的部分有点不太适用，做个小记录。
 据说用docker以后30系列也可以跑cuda10的东西，但是我试了，pytorch还是会报错cuda和显卡不匹配，不晓得是不是需要多的一些操作。
@@ -66,7 +65,7 @@ pip install torch-geometric
 后面照常：
 ```
 pip install gdown
-
+# 这里用gdown在命令行下载，也可以自己手动去谷歌网盘下载
 cd ~/taskgrasp_ws/TaskGrasp
 gdown https://drive.google.com/uc?id=1aZ0k43fBIZZQPPPraV-z6itpqCHuDiUU
 gdown https://drive.google.com/uc?id=1fasm-8MV6zBjdnbAHLbU8_8TZOkeABkR
@@ -75,23 +74,18 @@ unzip ./data.zip -d ./
 unzip ./cfg.zip -d ./
 unzip ./checkpoints.zip -d ./
 
-cp -r /mnt/taskgrasp_ws/TaskGrasp/xxx ./
-
 rm ./data.zip
 rm ./cfg.zip
 rm ./checkpoints.zip
-
-pip install open3d
-pip install opencv-python
-pip install opencv-contrib-python
 ```
 ### 开跑
 ```
 python visualize.py --data_and_grasps --obj_name 124_paint_roller
 python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_paint_roller
+python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class frying_pan.n.01 --task flip
+# 这里作者原本写的pan.n.01，可我翻了翻论文，Object Task Combinations根本没这一类。再翻一翻数据集里的object synsets links，tmd pan.n.01这个类就一个cake pan……作者你认真的吗？
 ```
-这里作者原本写的pan.n.01，可我翻了翻论文，Object Task Combinations根本没这一类。再翻一翻数据集里的object synsets links，tmd pan.n.01这个类就一个cake pan……作者你认真的吗？
 现在的问题：
 我想看一眼ap，结果跑gcngrasp的plot_ap.py的时候，居然发现有的obj_class的个数是0……正在看什么鬼问题
