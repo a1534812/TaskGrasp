@@ -3,7 +3,6 @@ Same Object, Different Grasps: Data and Semantic Knowledge for Task-Oriented Gra
 原项目传送门：[ori object](https://github.com/adithyamurali/TaskGrasp.git)
 
 碎碎念：
-正在试6D-graspnet+GCNgrasp能不能简单串联一下。
 
 其实基本就是顺着原项目的走，只是毕竟我能用的GPU全是30系列的，原本的有的部分有点不太适用，做个小记录。
 据说用docker以后30系列也可以跑cuda10的东西，但是我试了，pytorch还是会报错cuda和显卡不匹配，不晓得是不是需要多的一些操作。
