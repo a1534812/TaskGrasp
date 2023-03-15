@@ -56,13 +56,13 @@ cd Pointnet2_PyTorch
 pip install -r requirements.txt
 pip install -e .
 ```
-在该页面找到配合自己pytorch版本的包，下载到本地然后pip，里头每一个不一样的都给他下载下来装上：
+3. 首先要安装几个torch-geometric的前置：在该页面找到配合自己pytorch版本的包，下载到本地然后pip，里头每一个名字不一样的都给他下载下来装上：
 [https://data.pyg.org/whl/](https://data.pyg.org/whl/)
 然后再：
 ```
 pip install torch-geometric
 ```
-后面照常：
+4. 下载解压缩数据集
 ```
 pip install gdown
 # 这里用gdown在命令行下载，也可以自己手动去谷歌网盘下载
@@ -85,7 +85,6 @@ python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_
 python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class frying_pan.n.01 --task flip
-# 这里作者原本写的pan.n.01，可我翻了翻论文，Object Task Combinations根本没这一类。再翻一翻数据集里的object synsets links，tmd pan.n.01这个类就一个cake pan……作者你认真的吗？
 ```
 现在的问题：
 我想看一眼ap，结果跑gcngrasp的plot_ap.py的时候，居然发现有的obj_class的个数是0……正在看什么鬼问题
