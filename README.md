@@ -87,3 +87,4 @@ python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.ym
 ```
 现在的问题：
 我想看一眼ap，结果跑gcngrasp的plot_ap.py的时候，居然发现有的obj_class的个数是0……正在看什么鬼问题
+每天一个新迷惑：为什么我突然多了一个result的文件夹？？？
