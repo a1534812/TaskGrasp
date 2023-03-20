@@ -41,7 +41,7 @@ conda activate taskgrasp_37
 后面顺着原仓库的操作，我改了一部分源码，所以clone自己的：
 ```
 mkdir ~/taskgrasp_ws && cd ~/taskgrasp_ws
-https://github.com/a1534812/TaskGrasp.git
+git clone https://github.com/a1534812/TaskGrasp.git
 cd TaskGrasp
 pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 # 这两个包我只能单独下，不知道什么原因
