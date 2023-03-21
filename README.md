@@ -45,8 +45,7 @@ git clone https://github.com/a1534812/TaskGrasp.git
 cd TaskGrasp
 pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 # 这两个包我只能单独下，不知道什么原因
-conda install -c conda-forge pygraphviz
-conda install -c conda-forge gensim
+conda install -c conda-forge pygraphviz gensim
 pip install -r requirements.txt
 cd ~/taskgrasp_ws
 # 这个放心用，v3.0可以在cuda11用的
