@@ -81,7 +81,7 @@ rm ./checkpoints.zip
 ```
 python visualize.py --data_and_grasps --obj_name 124_paint_roller
 python visualize.py --visualize_labels  --visualize_labels_blacklist_object 124_paint_roller
-python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml
+python gcngrasp/train.py --cfg_file cfg/train/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --batch_size 16
 python gcngrasp/eval.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --save --visualize
 python gcngrasp/infer.py cfg/eval/gcngrasp/gcngrasp_split_mode_t_split_idx_3_.yml --obj_name pan --obj_class frying_pan.n.01 --task flip
 ```
